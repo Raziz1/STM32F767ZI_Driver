@@ -274,4 +274,7 @@ typedef struct
 #define GPIO_PIN_SET  (SET)
 #define GPIO_PIN_RESET(RESET)
 
+#include "STM32F767ZI_gpio_driver.h"
+
+
 #endif /* INC_STM32F767ZI_H_ */
