@@ -9,6 +9,21 @@
 #define INC_STM32F767ZI_H_
 
 #include <stdint.h>
+/*****************************************START: Processor Specific Details **************************************/
+/*
+ * ARM Cortex M7 Processor NVIC ISERx register addresses
+ */
+#define NVIC_ISER0	((volatile uint32_t*)0xE000E100)
+#define NVIC_ISER1	((volatile uint32_t*)0xE000E104)
+#define NVIC_ISER2	((volatile uint32_t*)0xE000E108)
+#define NVIC_ISER3	((volatile uint32_t*)0xE000E10C)
+/*
+ * ARM Cortex M7 Processor NVIC ICERx register addresses
+ */
+#define NVIC_ICER0	((volatile uint32_t*)0xE000E180)
+#define NVIC_ICER1	((volatile uint32_t*)0xE000E184)
+#define NVIC_ICER2	((volatile uint32_t*)0xE000E188)
+#define NVIC_ICER3	((volatile uint32_t*)0xE000E18C)
 
 /*
  * Base addresses of Flash and SRAM memories
@@ -44,7 +59,6 @@
 #define GPIOJ_BASEADDR     (AHB1PERIPH_BASEADDDR + 0x2400U)
 #define GPIOK_BASEADDR     (AHB1PERIPH_BASEADDDR + 0x2800U)
 #define RCC_BASEADDR       (AHB1PERIPH_BASEADDDR + 0x3800U)
-
 /*
  * Base addresses of peripherals which are hanging on APB1 bus
  */
@@ -134,6 +148,31 @@ typedef struct
 	volatile uint32_t DCKCFGR2;  /*TODO: FUNCTION*/
 }RCC_RegDef_t;
 
+/******************** EXTI register definition structures ********************/
+
+typedef struct
+{
+	volatile uint32_t IMR;           /*TODO: FUNCTION*/
+	volatile uint32_t EMR;		     /*TODO: FUNCTION*/
+	volatile uint32_t RTSR;		     /*TODO: FUNCTION*/
+	volatile uint32_t FTSR;		     /*TODO: FUNCTION*/
+	volatile uint32_t SWIER;		 /*TODO: FUNCTION*/
+	volatile uint32_t PR;		     /*TODO: FUNCTION*/
+}EXTI_RegDef_t;
+
+/******************** SYSCFG register definition structures ********************/
+
+typedef struct
+{
+	volatile uint32_t MEMRMP;        /*TODO: FUNCTION*/
+	volatile uint32_t PMC;		     /*TODO: FUNCTION*/
+	volatile uint32_t EXTICR[4];	 /*TODO: FUNCTION*/
+	uint32_t RESERVED1[2];		     /*TODO: FUNCTION*/
+	volatile uint32_t CMPCR;		 /*TODO: FUNCTION*/
+	uint32_t RESERVED[2];		     /*TODO: FUNCTION*/
+	volatile uint32_t CFGR;		     /*TODO: FUNCTION*/
+}SYSCFG_RegDef_t;
+
 /*
  * Peripheral definitions (Peripheral base addresses type casted to xxx_RegDef_t)
  */
@@ -150,7 +189,8 @@ typedef struct
 #define GPIOK   ((GPIO_RegDef_t*)GPIOK_BASEADDR)
 
 #define RCC     ((RCC_RegDef_t*)RCC_BASEADDR)
-
+#define EXTI	((EXTI_RegDef_t*)EXTI_BASEADDR)
+#define SYSCFG	((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 /*
  * Clock enable macros for GPIOx peripherals
  */
@@ -250,6 +290,34 @@ typedef struct
  * Clock disable macros for SYSCONFIG peripherals
  */
 #define SYSCFG_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 14));
+
+/*
+ * Returns port code for given GPIOx base address
+ */
+#define GPIO_BASEADDR_TO_CODE(x)     ((x==GPIOA)?0:\
+									  (x==GPIOB)?1:\
+                                      (x==GPIOC)?2:\
+                                      (x==GPIOD)?3:\
+                                      (x==GPIOE)?4:\
+                                      (x==GPIOF)?5:\
+                                      (x==GPIOG)?6:\
+                                      (x==GPIOH)?7:\
+                                      (x==GPIOI)?8:\
+                                      (x==GPIOJ)?9:\
+                                      (x==GPIOK)?10:0)
+
+
+/*
+ * IRQ(Interrupt Request) Numbers of STM32F767ZI MCU
+ * NOTE: update these macros with valid values according to your MCU
+ */
+#define IRQ_NO_EXTI0	  6
+#define IRQ_NO_EXTI1	  7
+#define IRQ_NO_EXTI2	  8
+#define IRQ_NO_EXTI3	  9
+#define IRQ_NO_EXTI4	  10
+#define IRQ_NO_EXTI9_5	  23
+#define IRQ_NO_EXTI15_10  40
 
 /*
  * Macros to reset GPIOx peripherals
