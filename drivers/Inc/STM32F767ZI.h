@@ -26,6 +26,12 @@
 #define NVIC_ICER3	((volatile uint32_t*)0xE000E18C)
 
 /*
+ * ARM Cortex M7 Processor Priority Register Address Calculation
+ */
+#define NVIC_PR_BASE_ADDR ((volatile uint32_t*)0xE000E400)
+
+#define NO_PR_BITS_IMPLEMENTED 4
+/*
  * Base addresses of Flash and SRAM memories
  */
 #define FLASH_BASEADDR 0x08000000U

@@ -6,4 +6,6 @@
 ../drivers/Src/STM32F767ZI_gpio_driver.c:328:6:GPIO_WriteToOutputPin	16	static
 ../drivers/Src/STM32F767ZI_gpio_driver.c:355:6:GPIO_WriteToOutputPort	16	static
 ../drivers/Src/STM32F767ZI_gpio_driver.c:373:6:GPIO_ToggleOutputPin	16	static
-../drivers/Src/STM32F767ZI_gpio_driver.c:391:6:GPIO_IRQConfig	16	static
+../drivers/Src/STM32F767ZI_gpio_driver.c:390:6:GPIO_IRQInterruptConfig	16	static
+../drivers/Src/STM32F767ZI_gpio_driver.c:456:6:GPIO_IRQPriorityConfig	24	static
+../drivers/Src/STM32F767ZI_gpio_driver.c:479:6:GPIO_IRQHandling	16	static
