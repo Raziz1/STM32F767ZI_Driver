@@ -263,12 +263,12 @@ typedef struct
 /*
  * Clock disable macros for SPIx peripherals
  */
-#define SPI1_PCLK_DI()  (RCC->APB2ENR &| ~(1 << 12));
-#define SPI2_PCLK_DI()  (RCC->APB1ENR &| ~(1 << 14));
-#define SPI3_PCLK_DI()  (RCC->APB1ENR &| ~(1 << 15));
-#define SPI4_PCLK_DI()  (RCC->APB2ENR &| ~(1 << 13));
-#define SPI5_PCLK_DI()  (RCC->APB2ENR &| ~(1 << 20));
-#define SPI6_PCLK_DI()  (RCC->APB2ENR &| ~(1 << 21));
+#define SPI1_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 12));
+#define SPI2_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 14));
+#define SPI3_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 15));
+#define SPI4_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 13));
+#define SPI5_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 20));
+#define SPI6_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 21));
 
 /*
  * Clock enable macros for I2Cx peripherals
@@ -392,6 +392,6 @@ typedef struct
 #define GPIO_PIN_RESET(RESET)
 
 #include "STM32F767ZI_gpio_driver.h"
-
+#include "STM32F767ZI_spi_driver.h"
 
 #endif /* INC_STM32F767ZI_H_ */
