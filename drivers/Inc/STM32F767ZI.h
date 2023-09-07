@@ -179,6 +179,21 @@ typedef struct
 	volatile uint32_t CFGR;		     /*TODO: FUNCTION*/
 }SYSCFG_RegDef_t;
 
+/******************** Peripheral register definition for SPI ********************/
+
+typedef struct
+{
+	volatile uint32_t CR1;           /**/
+	volatile uint32_t CR2;		   /**/
+	volatile uint32_t SR;         /**/
+	volatile uint32_t DR;           /**/
+	volatile uint32_t CRCPR;             /**/
+	volatile uint32_t RXCRCR;             /**/
+	volatile uint32_t TXCRCR;            /**/
+	volatile uint32_t I2SCFGR;            /**/
+	volatile uint32_t I2SPR;          /**/
+}SPI_RegDef_t;
+
 /*
  * Peripheral definitions (Peripheral base addresses type casted to xxx_RegDef_t)
  */
@@ -193,6 +208,14 @@ typedef struct
 #define GPIOI   ((GPIO_RegDef_t*)GPIOI_BASEADDR)
 #define GPIOJ   ((GPIO_RegDef_t*)GPIOJ_BASEADDR)
 #define GPIOK   ((GPIO_RegDef_t*)GPIOK_BASEADDR)
+
+#define SPI1   ((SPI_RegDef_t*)SPI1_BASEADDR)
+#define SPI2   ((SPI_RegDef_t*)SPI2_BASEADDR)
+#define SPI3   ((SPI_RegDef_t*)SPI3_BASEADDR)
+#define SPI4   ((SPI_RegDef_t*)SPI4_BASEADDR)
+#define SPI5   ((SPI_RegDef_t*)SPI5_BASEADDR)
+#define SPI6   ((SPI_RegDef_t*)SPI6_BASEADDR)
+
 
 #define RCC     ((RCC_RegDef_t*)RCC_BASEADDR)
 #define EXTI	((EXTI_RegDef_t*)EXTI_BASEADDR)
