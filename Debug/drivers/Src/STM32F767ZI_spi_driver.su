@@ -1,2 +1,2 @@
 ../drivers/Src/STM32F767ZI_spi_driver.c:27:6:SPI_PeriClockControl	16	static
-../drivers/Src/STM32F767ZI_spi_driver.c:98:6:SPI_Init	16	static
+../drivers/Src/STM32F767ZI_spi_driver.c:98:6:SPI_Init	24	static
