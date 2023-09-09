@@ -137,3 +137,26 @@ void SPI_Init(SPI_Handle_t *pSPIHandle)
 
 	pSPIHandle->pSPIx->CR1 = tempreg;
 }
+
+
+/****************************************************************
+ * @fn					- SPI_SendData
+ *
+ * @brief				-
+ *
+ * @param[in]			- Base address of the SPI peripheral
+ * @param[in]			- Pointer to TX buffer
+ * @param[in]			- Length of TX buffer
+ *
+ * @return				- none
+ *
+ * @Note 				- Blocking API because it waits until all bytes are transmitted
+ */
+void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len)
+{
+	while(Len > 0)
+	{
+		//1. Wait until TXE is set
+
+	}
+}
