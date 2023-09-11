@@ -1,3 +1,5 @@
 ../drivers/Src/STM32F767ZI_spi_driver.c:27:6:SPI_PeriClockControl	16	static
 ../drivers/Src/STM32F767ZI_spi_driver.c:98:6:SPI_Init	24	static
-../drivers/Src/STM32F767ZI_spi_driver.c:155:6:SPI_SendData	24	static
+../drivers/Src/STM32F767ZI_spi_driver.c:144:9:SPI_GetFlagStatus	16	static
+../drivers/Src/STM32F767ZI_spi_driver.c:166:6:SPI_SendData	24	static
+../drivers/Src/STM32F767ZI_spi_driver.c:204:6:SPI_PeripheralControl	16	static

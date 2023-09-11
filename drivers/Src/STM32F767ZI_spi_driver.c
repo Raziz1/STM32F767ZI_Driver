@@ -100,6 +100,9 @@ void SPI_Init(SPI_Handle_t *pSPIHandle)
 	//First lets configure the SPI_CR1 register
 	uint32_t tempreg = 0;
 
+	//Enable peripheral clock
+	SPI_PeriClockControl(pSPIHandle->pSPIx, ENABLE);
+
 	//1. Configure the device mode
 	tempreg |= pSPIHandle->SPIConfig.SPI_DeviceMode << 2;
 
@@ -138,6 +141,14 @@ void SPI_Init(SPI_Handle_t *pSPIHandle)
 	pSPIHandle->pSPIx->CR1 = tempreg;
 }
 
+uint8_t SPI_GetFlagStatus(SPI_RegDef_t *pSPIx, uint32_t FlagName)
+{
+	if (pSPIx->SR & FlagName)
+	{
+		return FLAG_SET;
+	}
+	return FLAG_RESET;
+}
 
 /****************************************************************
  * @fn					- SPI_SendData
@@ -157,6 +168,47 @@ void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len)
 	while(Len > 0)
 	{
 		//1. Wait until TXE is set
+		while(SPI_GetFlagStatus(pSPIx, SPI_TXE_FLAG) == FLAG_RESET);
 
+		//2. Check the DFF bit in CR1
+		if ((pSPIx->CR1 & (1 << SPI_CR1_DFF)))
+		{
+			//16 bit DFF
+			//1. Load the data into the DR
+			pSPIx->DR = *((uint16_t*)pTxBuffer);
+			Len -= 2;
+			(uint16_t*)pTxBuffer++;
+		}
+		else
+		{
+			//8 bit DFF
+			pSPIx->DR = *pTxBuffer;
+			Len --;
+			pTxBuffer++;
+		}
+	}
+}
+
+/****************************************************************
+ * @fn					- SPI_PeripheralControl
+ *
+ * @brief				-
+ *
+ * @param[in]			- Base address of the SPI peripheral
+ * @param[in]			- Enable or Disable
+ *
+ * @return				- none
+ *
+ * @Note 				- Must configure SPI parameters before enabling
+ */
+void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t EnOrDi)
+{
+	if (EnOrDi == ENABLE)
+	{
+		pSPIx->CR1 |= (1 << SPI_CR1_SPE);
+	}
+	else
+	{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_SPE);
 	}
 }

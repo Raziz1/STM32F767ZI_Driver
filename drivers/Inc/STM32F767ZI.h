@@ -384,12 +384,14 @@ typedef struct
 #define GPIOK_REG_RESET()  do{ (RCC->AHB1RSTR |= (1 << 10)); (RCC->AHB1RSTR |= ~(1 << 10)); } while(0)
 
 // Some generic macros
-#define ENABLE        1
-#define DISABLE       0
-#define SET           (ENABLE)
-#define RESET         (DISABLE)
-#define GPIO_PIN_SET  (SET)
-#define GPIO_PIN_RESET(RESET)
+#define ENABLE        	1
+#define DISABLE       	0
+#define SET           	(ENABLE)
+#define RESET         	(DISABLE)
+#define GPIO_PIN_SET  	(SET)
+#define GPIO_PIN_RESET	(RESET)
+#define FLAG_RESET 	  	(RESET)
+#define FLAG_SET 		(SET)
 
 /****************************************************************************
  * Bit position definitions of SPI peripheral
