@@ -212,3 +212,51 @@ void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t EnOrDi)
 		pSPIx->CR1 &= ~(1 << SPI_CR1_SPE);
 	}
 }
+
+/****************************************************************
+ * @fn					- SPI_SSIConfig
+ *
+ * @brief				-
+ *
+ * @param[in]			- Base address of the SPI peripheral
+ * @param[in]			- Enable or Disable
+ *
+ * @return				- none
+ *
+ * @Note 				- This bit has an effect only when the SSM bit is set. The value of this bit is forced onto the NSS pin and the I/O value of the NSS pin is ignored.
+ */
+void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi)
+{
+	if (EnOrDi == ENABLE)
+	{
+		pSPIx->CR1 |= (1 << SPI_CR1_SSI);
+	}
+	else
+	{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_SSI);
+	}
+}
+
+/****************************************************************
+ * @fn					- SPI_SSOEConfig
+ *
+ * @brief				-
+ *
+ * @param[in]			- Base address of the SPI peripheral
+ * @param[in]			- Enable or Disable
+ *
+ * @return				- none
+ *
+ * @Note 				-
+ */
+void SPI_SSOEConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi)
+{
+	if (EnOrDi == ENABLE)
+	{
+		pSPIx->CR2 |= (1 << SPI_CR2_SSOE);
+	}
+	else
+	{
+		pSPIx->CR2 &= ~(1 << SPI_CR2_SSOE);
+	}
+}

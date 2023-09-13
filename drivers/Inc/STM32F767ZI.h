@@ -103,15 +103,15 @@
 
 typedef struct
 {
-	volatile uint32_t MODER;           /*GPIO port mode register*/
-	volatile uint32_t OTYPER;		   /*GPIO port output type register*/
-	volatile uint32_t OSPEEDR;         /*GPIO port output speed register*/
-	volatile uint32_t PUPDR;           /*GPIO port pull-up/pull-down register*/
-	volatile uint32_t IDR;             /*GPIO port input data register*/
-	volatile uint32_t ODR;             /*GPIO port output data register*/
-	volatile uint32_t BSRR;            /*GPIO port bit set/reset register*/
-	volatile uint32_t LCKR;            /*GPIO port configuration lock register*/
-	volatile uint32_t AFR[2];          /*GPIO alternate low/high register*/
+	volatile uint32_t MODER;           /*GPIO port mode register		 		OFFSET: 0x00*/
+	volatile uint32_t OTYPER;		   /*GPIO port output type register 		OFFSET: 0x04*/
+	volatile uint32_t OSPEEDR;         /*GPIO port output speed register 		OFFSET: 0x08*/
+	volatile uint32_t PUPDR;           /*GPIO port pull-up/pull-down register	OFFSET: 0x0C*/
+	volatile uint32_t IDR;             /*GPIO port input data register			OFFSET: 0x10*/
+	volatile uint32_t ODR;             /*GPIO port output data register			OFFSET: 0x14*/
+	volatile uint32_t BSRR;            /*GPIO port bit set/reset register		OFFSET: 0x18*/
+	volatile uint32_t LCKR;            /*GPIO port configuration lock register	OFFSET: 0x1C*/
+	volatile uint32_t AFR[2];          /*GPIO alternate low/high register		OFFSET: 0x20-0x24*/
 }GPIO_RegDef_t;
 
 

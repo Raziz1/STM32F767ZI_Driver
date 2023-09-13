@@ -33,12 +33,12 @@ void SPI2_GPIOInits(void)
 	GPIO_Init(&SPIPins);
 
 	// MISO
-	//SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_14;
-	//GPIO_Init(&SPIPins);
+	SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_14;
+	GPIO_Init(&SPIPins);
 
 	// NSS
-	//SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
-	//GPIO_Init(&SPIPins);
+	SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
+	GPIO_Init(&SPIPins);
 }
 
 void SPI2_Inits(void)
@@ -47,12 +47,11 @@ void SPI2_Inits(void)
 	SPI2handle.pSPIx = SPI2;
 	SPI2handle.SPIConfig.SPI_BusConfig = SPI_BUS_CONFIG_FD;
 	SPI2handle.SPIConfig.SPI_DeviceMode = SPI_DEVICE_MODE_MASTER;
-	SPI2handle.SPIConfig.SPI_SclkSpeed = SPI_SCLK_SPEED_DIV2; //Generates SCLK of 8 MHz
+	SPI2handle.SPIConfig.SPI_SclkSpeed = SPI_SCLK_SPEED_DIV8; //Generates SCLK of 16MHz/8 = 2 MHz
 	SPI2handle.SPIConfig.SPI_DFF = SPI_DFF_8BITS;
 	SPI2handle.SPIConfig.SPI_CPOL = SPI_CPOL_LOW;
 	SPI2handle.SPIConfig.SPI_CPHA = SPI_CPHA_LOW;
 	SPI2handle.SPIConfig.SPI_SSM = SPI_SSM_EN; //Software slave management enabled for NSS pin
-
 	SPI_Init(&SPI2handle);
 
 }
@@ -66,11 +65,20 @@ int main(void)
 	//This function is used to initialize the SPI2 peripheral parameters
 	SPI2_Inits();
 
+	//This makes NSS signal internally high and avoids MODF error
+	SPI_SSIConfig(SPI2, ENABLE);
+
+	//This makes NSS signal internally high and avoids MODF error
+	SPI_SSOEConfig(SPI2, ENABLE);
+
 	//Enable the SPI2 peripheral
 	SPI_PeripheralControl(SPI2, ENABLE);
 
 	//Send data
 	SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
+
+	SPI_PeripheralControl(SPI2, DISABLE);
+
 
 	while(1);
 

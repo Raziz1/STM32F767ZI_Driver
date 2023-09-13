@@ -3,3 +3,5 @@
 ../drivers/Src/STM32F767ZI_spi_driver.c:144:9:SPI_GetFlagStatus	2
 ../drivers/Src/STM32F767ZI_spi_driver.c:166:6:SPI_SendData	4
 ../drivers/Src/STM32F767ZI_spi_driver.c:204:6:SPI_PeripheralControl	2
+../drivers/Src/STM32F767ZI_spi_driver.c:228:6:SPI_SSIConfig	2
+../drivers/Src/STM32F767ZI_spi_driver.c:252:6:SPI_SSOEConfig	2
