@@ -9,6 +9,7 @@
 #define INC_STM32F767ZI_H_
 
 #include <stdint.h>
+#include <stddef.h>
 /*****************************************START: Processor Specific Details **************************************/
 /*
  * ARM Cortex M7 Processor NVIC ISERx register addresses
@@ -382,6 +383,16 @@ typedef struct
 #define GPIOI_REG_RESET()  do{ (RCC->AHB1RSTR |= (1 << 8)); (RCC->AHB1RSTR |= ~(1 << 8)); } while(0)
 #define GPIOJ_REG_RESET()  do{ (RCC->AHB1RSTR |= (1 << 9)); (RCC->AHB1RSTR |= ~(1 << 9)); } while(0)
 #define GPIOK_REG_RESET()  do{ (RCC->AHB1RSTR |= (1 << 10)); (RCC->AHB1RSTR |= ~(1 << 10)); } while(0)
+
+/*
+ * Macros to reset all registers of SPIx peripherals
+ */
+#define SPI1_REG_RESET()  do{ (RCC->APB2RSTR |= (1 << 12)); (RCC->APB2RSTR |= ~(1 << 12)); } while(0)
+#define SPI2_REG_RESET()  do{ (RCC->APB1RSTR |= (1 << 14)); (RCC->APB1RSTR |= ~(1 << 14)); } while(0)
+#define SPI3_REG_RESET()  do{ (RCC->APB1RSTR |= (1 << 15)); (RCC->APB1RSTR |= ~(1 << 15)); } while(0)
+#define SPI4_REG_RESET()  do{ (RCC->APB2RSTR |= (1 << 13)); (RCC->APB2RSTR |= ~(1 << 13)); } while(0)
+#define SPI5_REG_RESET()  do{ (RCC->APB2RSTR |= (1 << 20)); (RCC->APB2RSTR |= ~(1 << 20)); } while(0)
+#define SPI6_REG_RESET()  do{ (RCC->APB2RSTR |= (1 << 21)); (RCC->APB2RSTR |= ~(1 << 21)); } while(0)
 
 // Some generic macros
 #define ENABLE        	1
