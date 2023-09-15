@@ -53,6 +53,30 @@ typedef struct
 #define I2C_MODE_SLAVE              0
 #define I2C_MODE_MASTER             1
 
+/*
+ * I2C status flags definitions
+ */
+#define I2C_FLAG_TXE        (1 << I2C_ISR_TXE)
+#define I2C_FLAG_TXIS       (1 << I2C_ISR_TXIS)
+#define I2C_FLAG_RXNE       (1 << I2C_ISR_RXNE)
+#define I2C_FLAG_ADDR 		(1 << I2C_ISR_ADDR)
+#define I2C_FLAG_NACKF      (1 << I2C_ISR_NACKF)
+#define I2C_FLAG_STOPF 		(1 << I2C_ISR_STOPF)
+#define I2C_FLAG_TC  		(1 << I2C_ISR_TC)
+#define I2C_FLAG_TCR  		(1 << I2C_ISR_TCR)
+#define I2C_FLAG_BERR 		(1 << I2C_ISR_BERR)
+#define I2C_FLAG_ARLO 		(1 << I2C_ISR_ARLO)
+#define I2C_FLAG_OVR  		(1 << I2C_ISR_OVR)
+#define I2C_FLAG_TIMEOUT 	(1 << I2C_ISR_TIMEOUT)
+#define I2C_FLAG_BUSY       (1 << I2C_ISR_BUSY)
+#define I2C_FLAG_DIR       	(1 << I2C_ISR_DIR)
+
+/**
+ * Repeated start Enable/Disable
+ */
+#define I2C_DISABLE_SR           0
+#define I2C_ENABLE_SR            1
+
 /**********************************************************************************
  * 							APIs supported by this driver
  * 		For more information about the API's check the function definitions
@@ -71,7 +95,8 @@ void I2C_DeInit(I2C_RegDef_t *pI2Cx);
 /*
  * Data send and receive
  */
-
+void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxbuffer, uint32_t Len, uint8_t SlaveAddr);
+void I2C_MasterReceiveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxbuffer, uint8_t Len, uint8_t SlaveAddr);
 
 /*
  * Interrupt based data send and receive
