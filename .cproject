@@ -71,12 +71,12 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.3105841" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.605400697.619068499" name="012i2c_master_rx_testing_it.c" rcbsApplicability="disable" resourcePath="Src/012i2c_master_rx_testing_it.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1115556201.1134432289">
-						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1115556201.1134432289" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1115556201"/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.605400697.47843014" name="013i2c_slave_tx_testing_it.c" rcbsApplicability="disable" resourcePath="Src/013i2c_slave_tx_testing_it.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1115556201.1168918055">
+						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1115556201.1168918055" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1115556201"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
-						<entry excluding="012i2c_master_rx_testing_it.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|006spi_tx_testing.c|005buttoninterrupt.c|002ledbutton.c|001ledtoggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="013i2c_slave_tx_testing_it.c|012i2c_master_rx_testing_it.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|006spi_tx_testing.c|005buttoninterrupt.c|002ledbutton.c|001ledtoggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
 					</sourceEntries>

@@ -16,7 +16,7 @@ static void spi_over_err_interrupt_handle(SPI_Handle_t *pSPIHandle);
  */
 
 /****************************************************************
- * @fn					- GPIO_PeriClockControl
+ * @fn					- SPI_PeriClockControl
  *
  * @brief				- This function enables or disables peripheral clock for the given GPIO port
  *

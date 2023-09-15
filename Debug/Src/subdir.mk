@@ -5,17 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/013i2c_slave_tx_testing_it.c \
+../Src/015uart_tx.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c 
 
 OBJS += \
-./Src/013i2c_slave_tx_testing_it.o \
+./Src/015uart_tx.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o 
 
 C_DEPS += \
-./Src/013i2c_slave_tx_testing_it.d \
+./Src/015uart_tx.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d 
 
@@ -27,7 +27,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/013i2c_slave_tx_testing_it.cyclo ./Src/013i2c_slave_tx_testing_it.d ./Src/013i2c_slave_tx_testing_it.o ./Src/013i2c_slave_tx_testing_it.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+	-$(RM) ./Src/015uart_tx.cyclo ./Src/015uart_tx.d ./Src/015uart_tx.o ./Src/015uart_tx.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
 
 .PHONY: clean-Src
 

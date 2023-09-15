@@ -212,6 +212,22 @@ typedef struct
 	volatile uint32_t TXDR;        /**/
 }I2C_RegDef_t;
 
+/******************** Peripheral register definition for USART ********************/
+
+typedef struct
+{
+    volatile uint32_t CR1;    // USART Control Register 1
+    volatile uint32_t CR2;    // USART Control Register 2
+    volatile uint32_t CR3;    // USART Control Register 3
+    volatile uint32_t BRR;    // USART Baud rate register
+    volatile uint32_t GTPR;   // USART Guard time and prescaler register
+    volatile uint32_t RTOR;   // USART Receiver timeout register
+    volatile uint32_t RQR;    // USART Request register
+    volatile uint32_t ISR;    // USART Interrupt and status register
+    volatile uint32_t ICR;    // USART Interrupt flag clear register
+    volatile uint32_t RDR;    // USART Receive data register
+    volatile uint32_t TDR;    // USART Transmit data register
+}USART_RegDef_t;
 
 /*
  * Peripheral definitions (Peripheral base addresses type casted to xxx_RegDef_t)
@@ -243,6 +259,15 @@ typedef struct
 #define RCC     ((RCC_RegDef_t*)RCC_BASEADDR)
 #define EXTI	((EXTI_RegDef_t*)EXTI_BASEADDR)
 #define SYSCFG	((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
+
+#define USART1  ((USART_RegDef_t*)USART1_BASEADDR)
+#define USART2  ((USART_RegDef_t*)USART2_BASEADDR)
+#define USART3  ((USART_RegDef_t*)USART3_BASEADDR)
+#define UART4   ((USART_RegDef_t*)UART4_BASEADDR)
+#define UART5   ((USART_RegDef_t*)UART5_BASEADDR)
+#define USART6  ((USART_RegDef_t*)USART6_BASEADDR)
+#define UART7   ((USART_RegDef_t*)UART7_BASEADDR)
+#define UART8   ((USART_RegDef_t*)UART8_BASEADDR)
 /*
  * Clock enable macros for GPIOx peripherals
  */
@@ -315,11 +340,11 @@ typedef struct
 #define USART1_PCLK_EN()  (RCC->APB2ENR |= (1 << 4));
 #define USART2_PCLK_EN()  (RCC->APB1ENR |= (1 << 17));
 #define USART3_PCLK_EN()  (RCC->APB1ENR |= (1 << 18));
-#define UART4_PCLK_EN()  (RCC->APB1ENR |= (1 << 19));
-#define UART5_PCLK_EN()  (RCC->APB1ENR |= (1 << 20));
+#define UART4_PCLK_EN()   (RCC->APB1ENR |= (1 << 19));
+#define UART5_PCLK_EN()   (RCC->APB1ENR |= (1 << 20));
 #define USART6_PCLK_EN()  (RCC->APB2ENR |= (1 << 5));
-#define UART7_PCLK_EN()  (RCC->APB1ENR |= (1 << 30));
-#define UART8_PCLK_EN()  (RCC->APB1ENR |= (1 << 31));
+#define UART7_PCLK_EN()   (RCC->APB1ENR |= (1 << 30));
+#define UART8_PCLK_EN()   (RCC->APB1ENR |= (1 << 31));
 
 /*
  * Clock disable macros for UARTx peripherals
@@ -327,11 +352,11 @@ typedef struct
 #define USART1_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 4));
 #define USART2_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 17));
 #define USART3_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 18));
-#define UART4_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 19));
-#define UART5_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 20));
+#define UART4_PCLK_DI()   (RCC->APB1ENR &= ~(1 << 19));
+#define UART5_PCLK_DI()   (RCC->APB1ENR &= ~(1 << 20));
 #define USART6_PCLK_DI()  (RCC->APB2ENR &= ~(1 << 5));
-#define UART7_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 30));
-#define UART8_PCLK_DI()  (RCC->APB1ENR &= ~(1 << 31));
+#define UART7_PCLK_DI()   (RCC->APB1ENR &= ~(1 << 30));
+#define UART8_PCLK_DI()   (RCC->APB1ENR &= ~(1 << 31));
 
 /*
  * Clock enable macros for SYSCONFIG peripherals
@@ -439,6 +464,16 @@ typedef struct
 #define I2C2_REG_RESET()  do{ (RCC->APB1RSTR |= (1 << 22)); (RCC->APB1RSTR |= ~(1 << 22)); } while(0)
 #define I2C3_REG_RESET()  do{ (RCC->APB1RSTR |= (1 << 23)); (RCC->APB1RSTR |= ~(1 << 23)); } while(0)
 #define I2C4_REG_RESET()  do{ (RCC->APB1RSTR |= (1 << 24)); (RCC->APB1RSTR |= ~(1 << 24)); } while(0)
+
+#define USART1_REG_RESET()  do{ (RCC->APB2ENR |= (1 << 4));  (RCC->APB2ENR |= ~(1 << 4)); } while(0)
+#define USART2_REG_RESET()  do{ (RCC->APB1ENR |= (1 << 17)); (RCC->APB1ENR |= ~(1 << 17)); } while(0)
+#define USART3_REG_RESET()  do{ (RCC->APB1ENR |= (1 << 18)); (RCC->APB1ENR |= ~(1 << 18)); } while(0)
+#define UART4_REG_RESET()  do{ (RCC->APB1ENR |= (1 << 19)); (RCC->APB1ENR |= ~(1 << 19)); } while(0)
+#define UART5_REG_RESET()  do{ (RCC->APB1ENR |= (1 << 20)); (RCC->APB1ENR |= ~(1 << 20)); } while(0)
+#define USART6_REG_RESET()  do{ (RCC->APB2ENR |= (1 << 5));  (RCC->APB2ENR |= ~(1 << 5)); } while(0)
+#define UART7_REG_RESET()  do{ (RCC->APB1ENR |= (1 << 30)); (RCC->APB1ENR |= ~(1 << 30)); } while(0)
+#define UART8_REG_RESET()  do{ (RCC->APB1ENR |= (1 << 31)); (RCC->APB1ENR |= ~(1 << 31)); } while(0)
+
 
 // Some generic macros
 #define ENABLE        	1
@@ -588,9 +623,125 @@ typedef struct
 #define I2C_ICR_TIMEOUTCF   12
 #define I2C_ICR_ALERTCF     13
 
+/***********************************************************************************************
+ *                      Bit position definitions of USART peripheral
+ ***********************************************************************************************/
+#define USART_CR1_UE        0
+#define USART_CR1_UESM      1
+#define USART_CR1_RE        2
+#define USART_CR1_TE        3
+#define USART_CR1_IDLEIE    4
+#define USART_CR1_RXNEIE    5
+#define USART_CR1_TCIE      6
+#define USART_CR1_TXEIE     7
+#define USART_CR1_PEIE      8
+#define USART_CR1_PS        9
+#define USART_CR1_PCE       10
+#define USART_CR1_WAKE      11
+#define USART_CR1_M0        12
+#define USART_CR1_MME       13
+#define USART_CR1_CMIE      14
+#define USART_CR1_OVER8     15
+#define USART_CR1_DEDT      16
+#define USART_CR1_DEAT      21
+#define USART_CR1_RTOIE     26
+#define USART_CR1_EOBIE     27
+#define USART_CR1_M1        28
+
+#define USART_CR2_ADDM7     4
+#define USART_CR2_LBDL      5
+#define USART_CR2_LBDIE     6
+#define USART_CR2_LBCL      8
+#define USART_CR2_CPHA      9
+#define USART_CR2_CPOL      10
+#define USART_CR2_CLKEN     11
+#define USART_CR2_STOP      12
+#define USART_CR2_LINEN     14
+#define USART_CR2_SWAP      15
+#define USART_CR2_RXINV     16
+#define USART_CR2_TXINV     17
+#define USART_CR2_DATAINV   18
+#define USART_CR2_MSBFIRST  19
+#define USART_CR2_ABREN     20
+#define USART_CR2_ABRMOD    21
+#define USART_CR2_RTOEN     23
+#define USART_CR2_ADD_3_0   24
+#define USART_CR2_ADD_7_4   28
+
+#define USART_CR3_EIE       0
+#define USART_CR3_IREN      1
+#define USART_CR3_IRLP      2
+#define USART_CR3_HDSEL     3
+#define USART_CR3_NACK      4
+#define USART_CR3_SCEN      5
+#define USART_CR3_DMAR      6
+#define USART_CR3_DMAT      7
+#define USART_CR3_RTSE      8
+#define USART_CR3_CTSE      9
+#define USART_CR3_CTSIE     10
+#define USART_CR3_ONEBIT    11
+#define USART_CR3_OVRDIS    12
+#define USART_CR3_DDRE      13
+#define USART_CR3_DEM       14
+#define USART_CR3_DEP       15
+#define USART_CR3_SCARCNT0  17
+#define USART_CR3_SCARCNT1  18
+#define USART_CR3_SCARCNT2  19
+#define USART_CR3_WUS0      20
+#define USART_CR3_WUS1      21
+#define USART_CR3_WUFIE     22
+#define USART_CR3_UCESM     23
+#define USART_CR3_TCBGTIE   24
+
+#define USART_RQR_ABRRQ     0
+#define USART_RQR_SBKRQ     1
+#define USART_RQR_MMRQ      2
+#define USART_RQR_RXFRQ     3
+#define USART_RQR_TXFRQ     4
+
+#define USART_ISR_PE        0
+#define USART_ISR_FE        1
+#define USART_ISR_NF        2
+#define USART_ISR_ORE       3
+#define USART_ISR_IDLE      4
+#define USART_ISR_RXNE      5
+#define USART_ISR_TC        6
+#define USART_ISR_TXE       7
+#define USART_ISR_LBDF      8
+#define USART_ISR_CTSIF     9
+#define USART_ISR_CTS       10
+#define USART_ISR_RTOF      11
+#define USART_ISR_EOBF      12
+#define USART_ISR_ABRE      14
+#define USART_ISR_ABRF      15
+#define USART_ISR_BUSY      16
+#define USART_ISR_CMF       17
+#define USART_ISR_SBKF      18
+#define USART_ISR_RWU       19
+#define USART_ISR_WUF       20
+#define USART_ISR_TEACK     21
+#define USART_ISR_REACK     22
+#define USART_ISR_TCBGT     25
+
+#define USART_ICR_PECF      0
+#define USART_ICR_FECF      1
+#define USART_ICR_NCF       2
+#define USART_ICR_ORECF     3
+#define USART_ICR_IDLECF    4
+#define USART_ICR_TCCF      6
+#define USART_ICR_TCBGTCF   7
+#define USART_ICR_LBDCF     8
+#define USART_ICR_CTSCF     9
+#define USART_ICR_RTOCF     11
+#define USART_ICR_EOBCF     12
+#define USART_ICR_CMCF      17
+#define USART_ICR_WUCF      20
+
 
 #include "STM32F767ZI_gpio_driver.h"
 #include "STM32F767ZI_spi_driver.h"
 #include "STM32F767ZI_i2c_driver.h"
+#include "STM32F767ZI_usart_driver.h"
+#include "STM32F767ZI_rcc_driver.h"
 
 #endif /* INC_STM32F767ZI_H_ */

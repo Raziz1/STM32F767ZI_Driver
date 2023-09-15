@@ -6,9 +6,6 @@
  */
 #include "STM32F767ZI_i2c_driver.h"
 
-uint16_t AHB_PreScaler[8] = {2,4,8,16,64,128,256,512};
-uint16_t APB1_PreScaler[4] = {2,4,8,16};
-
 /*********************************************************************************************
  *   Hard-coded I2C_TIMINGR timing settings depending on the I2C clock
  *      See tables in ref manual, section 33.4.9
@@ -26,64 +23,6 @@ static void I2C_GenerateStartCondition(I2C_RegDef_t *pI2Cx);
 static void I2C_ExecuteAddressPhaseWrite(I2C_RegDef_t *pI2Cx, uint8_t SlaveAddr);
 static void I2C_ExecuteAddressPhaseRead(I2C_RegDef_t *pI2Cx, uint8_t SlaveAddr);
 static void I2C_GenerateStopCondition(I2C_RegDef_t *pI2Cx);
-
-uint32_t RCC_GetPLLOutputClock()
-{
-	// TODO: Write function to determine PLL output clock
-	return 0;
-}
-
-uint32_t RCC_GetPCLK1Value(void)
-{
-	uint32_t pclk1, SystemClk;
-	uint8_t clksrc, temp, ahbp, apb1p;
-	clksrc = ((RCC->CFGR >> 2) & 0x3);
-
-	if (clksrc == 0)
-	{
-		// HSI clock source
-		SystemClk = 16000000;
-	}
-	else if (clksrc == 1)
-	{
-		// HSE clock source
-		SystemClk = 8000000;
-
-	}
-	else if (clksrc == 2)
-	{
-		// PLL is not used in this course
-		// TODO: Write function to determine PLL output clock
-		SystemClk = RCC_GetPLLOutputClock();
-	}
-
-	// Determine AHB prescaler from register
-	temp = ((RCC->CFGR >> 4) & 0xF);
-
-	if (temp < 8)
-	{
-		ahbp = 1;
-	}
-	else
-	{
-		ahbp = AHB_PreScaler[temp - 8];
-	}
-
-	// Determine APB1 prescaler from register
-	temp = ((RCC->CFGR >> 10) & 0x7);
-
-	if (temp < 4)
-	{
-		apb1p = 1;
-	}
-	else
-	{
-		apb1p = APB1_PreScaler[temp - 4];
-	}
-
-	pclk1 = (SystemClk / ahbp) / apb1p;
-	return pclk1;
-}
 
 static void I2C_GenerateStartCondition(I2C_RegDef_t *pI2Cx)
 {
