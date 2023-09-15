@@ -363,13 +363,29 @@ typedef struct
  * IRQ(Interrupt Request) Numbers of STM32F767ZI MCU
  * NOTE: update these macros with valid values according to your MCU
  */
-#define IRQ_NO_EXTI0	  6
-#define IRQ_NO_EXTI1	  7
-#define IRQ_NO_EXTI2	  8
-#define IRQ_NO_EXTI3	  9
-#define IRQ_NO_EXTI4	  10
-#define IRQ_NO_EXTI9_5	  23
-#define IRQ_NO_EXTI15_10  40
+#define IRQ_NO_EXTI0 		6
+#define IRQ_NO_EXTI1 		7
+#define IRQ_NO_EXTI2 		8
+#define IRQ_NO_EXTI3 		9
+#define IRQ_NO_EXTI4 		10
+#define IRQ_NO_EXTI9_5 		23
+#define IRQ_NO_EXTI15_10 	40
+
+#define IRQ_NO_SPI1         35
+#define IRQ_NO_SPI2         36
+#define IRQ_NO_SPI3         51
+#define IRQ_NO_SPI4         84
+#define IRQ_NO_SPI5         85
+#define IRQ_NO_SPI6         86
+
+#define IRQ_NO_I2C1_EV      31
+#define IRQ_NO_I2C1_ER      32
+#define IRQ_NO_I2C2_EV      33
+#define IRQ_NO_I2C2_ER      34
+#define IRQ_NO_I2C3_EV      72
+#define IRQ_NO_I2C3_ER      73
+#define IRQ_NO_I2C4_EV      95
+#define IRQ_NO_I2C4_ER      96
 
 /*
  * Macros for all priority levels

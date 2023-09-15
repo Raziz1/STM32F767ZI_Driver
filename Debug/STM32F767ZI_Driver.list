@@ -21,31 +21,31 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         000000b4  20000000  08001f58  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000188  200000b4  0800200c  000200b4  2**2
+  9 .bss          000001b8  200000b4  0800200c  000200b4  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  2000023c  0800200c  0002023c  2**0
+ 10 ._user_heap_stack 00000604  2000026c  0800200c  0002026c  2**0
                   ALLOC
  11 .ARM.attributes 0000002a  00000000  00000000  000200b4  2**0
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  000200de  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00001c09  00000000  00000000  00020121  2**0
+ 13 .debug_info   00001f0c  00000000  00000000  00020121  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 0000073f  00000000  00000000  00021d2a  2**0
+ 14 .debug_abbrev 000007a4  00000000  00000000  0002202d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000220  00000000  00000000  00022470  2**3
+ 15 .debug_aranges 00000260  00000000  00000000  000227d8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000185  00000000  00000000  00022690  2**0
+ 16 .debug_rnglists 000001ba  00000000  00000000  00022a38  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00003913  00000000  00000000  00022815  2**0
+ 17 .debug_macro  00003a11  00000000  00000000  00022bf2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   000029ef  00000000  00000000  00026128  2**0
+ 18 .debug_line   00002ec9  00000000  00000000  00026603  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0000cd1e  00000000  00000000  00028b17  2**0
+ 19 .debug_str    0000cfe3  00000000  00000000  000294cc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00000f30  00000000  00000000  00035838  2**2
+ 20 .debug_frame  00001064  00000000  00000000  000364b0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 000000a5  00000000  00000000  00036768  2**0
+ 21 .debug_line_str 000000a5  00000000  00000000  00037514  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -139,7 +139,7 @@ Disassembly of section .text:
  80002de:	bf00      	nop
 
 080002e0 <delay>:
-uint8_t rcv_buff[];
+uint8_t rcv_buff[32];
 uint8_t commandcode;
 uint8_t len;
 
@@ -392,10 +392,10 @@ int main(void)
  8000436:	bf00      	nop
  8000438:	40005400 	.word	0x40005400
  800043c:	40020800 	.word	0x40020800
- 8000440:	200000e9 	.word	0x200000e9
+ 8000440:	20000118 	.word	0x20000118
  8000444:	200000d0 	.word	0x200000d0
- 8000448:	200000ea 	.word	0x200000ea
- 800044c:	200000e8 	.word	0x200000e8
+ 8000448:	20000119 	.word	0x20000119
+ 800044c:	200000f8 	.word	0x200000f8
  8000450:	08001f10 	.word	0x08001f10
 
 08000454 <_read>:
@@ -648,8 +648,8 @@ void *_sbrk(ptrdiff_t incr)
  8000582:	bd80      	pop	{r7, pc}
  8000584:	20080000 	.word	0x20080000
  8000588:	00000400 	.word	0x00000400
- 800058c:	200000ec 	.word	0x200000ec
- 8000590:	20000240 	.word	0x20000240
+ 800058c:	2000011c 	.word	0x2000011c
+ 8000590:	20000270 	.word	0x20000270
 
 08000594 <Reset_Handler>:
 
@@ -746,7 +746,7 @@ LoopForever:
   ldr r2, =_sbss
  80005dc:	200000b4 	.word	0x200000b4
   ldr r4, =_ebss
- 80005e0:	2000023c 	.word	0x2000023c
+ 80005e0:	2000026c 	.word	0x2000026c
 
 080005e4 <ADC_IRQHandler>:
  * @retval : None
@@ -2070,7 +2070,7 @@ void I2C_Init(I2C_Handle_t *pI2CHandle)
     pI2CHandle->Mode = I2C_MODE_SLAVE;
  8000e30:	687b      	ldr	r3, [r7, #4]
  8000e32:	2200      	movs	r2, #0
- 8000e34:	731a      	strb	r2, [r3, #12]
+ 8000e34:	779a      	strb	r2, [r3, #30]
 
     // Program the device own address (Using 7-bit slave address)
     uint32_t tempreg = 0;
@@ -2557,9 +2557,9 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  800114c:	f000 bd82 	b.w	8001c54 <_fflush_r>
  8001150:	bd10      	pop	{r4, pc}
  8001152:	bf00      	nop
- 8001154:	200000f0 	.word	0x200000f0
- 8001158:	20000158 	.word	0x20000158
- 800115c:	200001c0 	.word	0x200001c0
+ 8001154:	20000120 	.word	0x20000120
+ 8001158:	20000188 	.word	0x20000188
+ 800115c:	200001f0 	.word	0x200001f0
 
 08001160 <global_stdio_init.part.0>:
  8001160:	b510      	push	{r4, lr}
@@ -2580,21 +2580,21 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  8001186:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
  800118a:	2112      	movs	r1, #18
  800118c:	f7ff bf98 	b.w	80010c0 <std>
- 8001190:	20000228 	.word	0x20000228
- 8001194:	200000f0 	.word	0x200000f0
+ 8001190:	20000258 	.word	0x20000258
+ 8001194:	20000120 	.word	0x20000120
  8001198:	08001109 	.word	0x08001109
 
 0800119c <__sfp_lock_acquire>:
  800119c:	4801      	ldr	r0, [pc, #4]	; (80011a4 <__sfp_lock_acquire+0x8>)
  800119e:	f000 b90d 	b.w	80013bc <__retarget_lock_acquire_recursive>
  80011a2:	bf00      	nop
- 80011a4:	20000231 	.word	0x20000231
+ 80011a4:	20000261 	.word	0x20000261
 
 080011a8 <__sfp_lock_release>:
  80011a8:	4801      	ldr	r0, [pc, #4]	; (80011b0 <__sfp_lock_release+0x8>)
  80011aa:	f000 b908 	b.w	80013be <__retarget_lock_release_recursive>
  80011ae:	bf00      	nop
- 80011b0:	20000231 	.word	0x20000231
+ 80011b0:	20000261 	.word	0x20000261
 
 080011b4 <__sinit>:
  80011b4:	b510      	push	{r4, lr}
@@ -2614,7 +2614,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  80011d8:	e7f2      	b.n	80011c0 <__sinit+0xc>
  80011da:	bf00      	nop
  80011dc:	08001121 	.word	0x08001121
- 80011e0:	20000228 	.word	0x20000228
+ 80011e0:	20000258 	.word	0x20000258
 
 080011e4 <_fwalk_sglue>:
  80011e4:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -2742,7 +2742,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  80012f2:	b103      	cbz	r3, 80012f6 <_close_r+0x1a>
  80012f4:	6023      	str	r3, [r4, #0]
  80012f6:	bd38      	pop	{r3, r4, r5, pc}
- 80012f8:	2000022c 	.word	0x2000022c
+ 80012f8:	2000025c 	.word	0x2000025c
 
 080012fc <_lseek_r>:
  80012fc:	b538      	push	{r3, r4, r5, lr}
@@ -2760,7 +2760,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  8001316:	b103      	cbz	r3, 800131a <_lseek_r+0x1e>
  8001318:	6023      	str	r3, [r4, #0]
  800131a:	bd38      	pop	{r3, r4, r5, pc}
- 800131c:	2000022c 	.word	0x2000022c
+ 800131c:	2000025c 	.word	0x2000025c
 
 08001320 <_read_r>:
  8001320:	b538      	push	{r3, r4, r5, lr}
@@ -2778,7 +2778,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  800133a:	b103      	cbz	r3, 800133e <_read_r+0x1e>
  800133c:	6023      	str	r3, [r4, #0]
  800133e:	bd38      	pop	{r3, r4, r5, pc}
- 8001340:	2000022c 	.word	0x2000022c
+ 8001340:	2000025c 	.word	0x2000025c
 
 08001344 <_write_r>:
  8001344:	b538      	push	{r3, r4, r5, lr}
@@ -2796,7 +2796,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  800135e:	b103      	cbz	r3, 8001362 <_write_r+0x1e>
  8001360:	6023      	str	r3, [r4, #0]
  8001362:	bd38      	pop	{r3, r4, r5, pc}
- 8001364:	2000022c 	.word	0x2000022c
+ 8001364:	2000025c 	.word	0x2000025c
 
 08001368 <__errno>:
  8001368:	4b01      	ldr	r3, [pc, #4]	; (8001370 <__errno+0x8>)
@@ -2911,7 +2911,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  800144a:	e7ca      	b.n	80013e2 <_free_r+0x22>
  800144c:	bd38      	pop	{r3, r4, r5, pc}
  800144e:	bf00      	nop
- 8001450:	20000234 	.word	0x20000234
+ 8001450:	20000264 	.word	0x20000264
 
 08001454 <sbrk_aligned>:
  8001454:	b570      	push	{r4, r5, r6, lr}
@@ -2939,7 +2939,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  8001488:	f04f 34ff 	mov.w	r4, #4294967295
  800148c:	4620      	mov	r0, r4
  800148e:	bd70      	pop	{r4, r5, r6, pc}
- 8001490:	20000238 	.word	0x20000238
+ 8001490:	20000268 	.word	0x20000268
 
 08001494 <_malloc_r>:
  8001494:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -3050,19 +3050,19 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  800158a:	605b      	str	r3, [r3, #4]
  800158c:	deff      	udf	#255	; 0xff
  800158e:	bf00      	nop
- 8001590:	20000234 	.word	0x20000234
+ 8001590:	20000264 	.word	0x20000264
 
 08001594 <__malloc_lock>:
  8001594:	4801      	ldr	r0, [pc, #4]	; (800159c <__malloc_lock+0x8>)
  8001596:	f7ff bf11 	b.w	80013bc <__retarget_lock_acquire_recursive>
  800159a:	bf00      	nop
- 800159c:	20000230 	.word	0x20000230
+ 800159c:	20000260 	.word	0x20000260
 
 080015a0 <__malloc_unlock>:
  80015a0:	4801      	ldr	r0, [pc, #4]	; (80015a8 <__malloc_unlock+0x8>)
  80015a2:	f7ff bf0c 	b.w	80013be <__retarget_lock_release_recursive>
  80015a6:	bf00      	nop
- 80015a8:	20000230 	.word	0x20000230
+ 80015a8:	20000260 	.word	0x20000260
 
 080015ac <__sfputc_r>:
  80015ac:	6893      	ldr	r3, [r2, #8]
@@ -3979,7 +3979,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  8001de6:	b103      	cbz	r3, 8001dea <_sbrk_r+0x1a>
  8001de8:	6023      	str	r3, [r4, #0]
  8001dea:	bd38      	pop	{r3, r4, r5, pc}
- 8001dec:	2000022c 	.word	0x2000022c
+ 8001dec:	2000025c 	.word	0x2000025c
 
 08001df0 <__swhatbuf_r>:
  8001df0:	b570      	push	{r4, r5, r6, lr}
@@ -4080,7 +4080,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  8001ece:	6023      	str	r3, [r4, #0]
  8001ed0:	bd38      	pop	{r3, r4, r5, pc}
  8001ed2:	bf00      	nop
- 8001ed4:	2000022c 	.word	0x2000022c
+ 8001ed4:	2000025c 	.word	0x2000025c
 
 08001ed8 <_isatty_r>:
  8001ed8:	b538      	push	{r3, r4, r5, lr}
@@ -4096,7 +4096,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
  8001eee:	b103      	cbz	r3, 8001ef2 <_isatty_r+0x1a>
  8001ef0:	6023      	str	r3, [r4, #0]
  8001ef2:	bd38      	pop	{r3, r4, r5, pc}
- 8001ef4:	2000022c 	.word	0x2000022c
+ 8001ef4:	2000025c 	.word	0x2000025c
 
 08001ef8 <_init>:
  8001ef8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}

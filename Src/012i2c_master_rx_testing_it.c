@@ -12,7 +12,6 @@
 I2C_Handle_t I2C1Handle;
 #define MY_ADDR     0x61
 #define SLAVE_ADDR  0x68
-uint8_t rxComplt = RESET;
 
 //Receive buffer
 uint8_t rcv_buff[32];
@@ -79,9 +78,6 @@ int main(void)
 	//I2C peripheral configuration
 	I2C1_Inits();
 
-    // I2C IRQ config
-    I2C_IRQInterruptConfig(IRQ_NO_I2C2_EV, ENABLE);
-
 	//Enable the I2C peripheral
 	I2C_PeripheralControl(I2C1, ENABLE);
 
@@ -90,53 +86,25 @@ int main(void)
         // wait for button press
         while( ! GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13) );
 
+        //printf("button pressed\n");
+
         delay();
 
         commandcode = 0x51;
 
-        while (I2C_MasterSendDataIT(&I2C2Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR) != I2C_READY);
+        I2C_MasterSendData(&I2C1Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR); // I2C_ENABLE_SR: no stop at the end --> restart
 
-        while (I2C_MasterReceiveDataIT(&I2C2Handle, &len, 1, SLAVE_ADDR, I2C_ENABLE_SR) != I2C_READY);
+        I2C_MasterReceiveData(&I2C1Handle, &len, 1, SLAVE_ADDR, I2C_ENABLE_SR);
 
-        while (rxComplt != SET);
-
-        printf("len: %d\n", len);
-
-        rxComplt = RESET;
+        //printf("data len: %d\n", len);
 
         commandcode = 0x52;
 
-        while (I2C_MasterSendDataIT(&I2C2Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR) != I2C_READY);
+        I2C_MasterSendData(&I2C1Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR);
 
-        while (I2C_MasterReceiveDataIT(&I2C2Handle, rcv_buf, len, SLAVE_ADDR, I2C_DISABLE_SR)!= I2C_READY);
+        I2C_MasterReceiveData(&I2C1Handle, rcv_buff, len, SLAVE_ADDR, I2C_DISABLE_SR); // I2C_DISABLE_SR: stop at the end
 
-        while (rxComplt != SET);
-
-        printf("buffer: %s\n", rcv_buf);
-
-        rxComplt = RESET;
-    }
-}
-
-void I2C_EV_IRQHandler(void)
-{
-    I2C_EV_IRQHandling(&I2C1Handle);
-}
-
-void I2C_ER_IRQHandler(void)
-{
-    I2C_ER_IRQHandling(&I2C1Handle);
-}
-
-
-void I2C_ApplicationEventCallback(I2C_Handle_t *pI2CHandle, uint8_t AppEvent)
-{
-    if(AppEvent == I2C_EV_TX_CMPLT)
-    {
-        //printf("Transmission complete \n");
-    }else if (AppEvent == I2C_EV_RX_CMPLT)
-    {
-        //printf("Reception complete \n");
-        rxComplt = SET;
+        printf("buffer: %s", rcv_buff);
+        //printf(rcv_buf);
     }
 }
