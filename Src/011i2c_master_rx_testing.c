@@ -92,19 +92,19 @@ int main(void)
 
         commandcode = 0x51;
 
-        I2C_MasterSendData(&I2C2Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR); // I2C_ENABLE_SR: no stop at the end --> restart
+        I2C_MasterSendData(&I2C1Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR); // I2C_ENABLE_SR: no stop at the end --> restart
 
-        I2C_MasterReceiveData(&I2C2Handle, &len, 1, SLAVE_ADDR, I2C_ENABLE_SR);
+        I2C_MasterReceiveData(&I2C1Handle, &len, 1, SLAVE_ADDR, I2C_ENABLE_SR);
 
         //printf("data len: %d\n", len);
 
         commandcode = 0x52;
 
-        I2C_MasterSendData(&I2C2Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR);
+        I2C_MasterSendData(&I2C1Handle, &commandcode, 1, SLAVE_ADDR, I2C_ENABLE_SR);
 
-        I2C_MasterReceiveData(&I2C2Handle, rcv_buf, len, SLAVE_ADDR, I2C_DISABLE_SR); // I2C_DISABLE_SR: stop at the end
+        I2C_MasterReceiveData(&I2C1Handle, rcv_buff, len, SLAVE_ADDR, I2C_DISABLE_SR); // I2C_DISABLE_SR: stop at the end
 
-        printf("buffer: %s", rcv_buf);
+        printf("buffer: %s", rcv_buff);
         //printf(rcv_buf);
     }
 }

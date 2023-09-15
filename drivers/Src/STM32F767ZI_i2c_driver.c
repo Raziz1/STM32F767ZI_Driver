@@ -281,7 +281,7 @@ void I2C_DeInit(I2C_RegDef_t *pI2Cx)
  *
  * @Note 				- none
  */
-void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxbuffer, uint32_t Len, uint8_t SlaveAddr)
+void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxbuffer, uint32_t Len, uint8_t SlaveAddr, uint8_t Sr)
 {
 	I2C_ExecuteAddressPhaseWrite(pI2CHandle->pI2Cx,SlaveAddr);
 	//Clear automatic end mode bit to software end mode (TC flag is set when NBYTES data are transferred, stretching SCL low)
@@ -306,7 +306,11 @@ void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxbuffer, uint32_t L
     while (!I2C_GetFlagStatus(pI2CHandle->pI2Cx,I2C_FLAG_TC));
 
 	// Generate a stop bit
-	I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+    if (Sr == I2C_DISABLE_SR)
+    {
+        // Generate STOP condition
+        I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+    }
 
 	// Clear STOPF flag
     pI2CHandle->pI2Cx->ICR |= (1 << I2C_ICR_STOPCF);
@@ -328,7 +332,7 @@ void I2C_MasterSendData(I2C_Handle_t *pI2CHandle, uint8_t *pTxbuffer, uint32_t L
  *
  * @Note 				- none
  */
-void I2C_MasterReceiveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxbuffer, uint8_t Len, uint8_t SlaveAddr)
+void I2C_MasterReceiveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxbuffer, uint8_t Len, uint8_t SlaveAddr, uint8_t Sr)
 {
 	// Send the address of the slave with r/nw bit set to R(1) (total 8 bits)
 	I2C_ExecuteAddressPhaseRead(pI2CHandle->pI2Cx, SlaveAddr);
@@ -353,7 +357,11 @@ void I2C_MasterReceiveData(I2C_Handle_t *pI2CHandle, uint8_t *pRxbuffer, uint8_t
     while (!I2C_GetFlagStatus(pI2CHandle->pI2Cx,I2C_FLAG_TC));
 
 	// Generate a stop bit
-	I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+    if (Sr == I2C_DISABLE_SR)
+    {
+        // Generate STOP condition
+        I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+    }
 
 	// Clear STOPF flag
     pI2CHandle->pI2Cx->ICR |= (1 << I2C_ICR_STOPCF);
