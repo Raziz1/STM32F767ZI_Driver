@@ -19,3 +19,6 @@
 ../drivers/Src/STM32F767ZI_i2c_driver.c:591:6:I2C_CloseReceiveData	16	static
 ../drivers/Src/STM32F767ZI_i2c_driver.c:615:6:I2C_EV_IRQHandling	24	static
 ../drivers/Src/STM32F767ZI_i2c_driver.c:769:6:I2C_ER_IRQHandling	24	static
+../drivers/Src/STM32F767ZI_i2c_driver.c:842:6:I2C_SlaveEnableDisableCallbackEvents	16	static
+../drivers/Src/STM32F767ZI_i2c_driver.c:877:6:I2C_SlaveSendData	16	static
+../drivers/Src/STM32F767ZI_i2c_driver.c:893:9:I2C_SlaveReceiveData	16	static

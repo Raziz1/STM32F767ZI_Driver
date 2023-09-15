@@ -826,3 +826,71 @@ void I2C_ER_IRQHandling(I2C_Handle_t *pI2CHandle)
         I2C_ApplicationEventCallback(pI2CHandle,I2C_ERROR_TIMEOUT);
     }
 }
+
+/****************************************************************
+ * @fn					- I2C_SlaveEnableDisableCallbackEvents
+ *
+ * @brief				-
+ *
+ * @param[in]			- Pointer to the I2C handle
+ * @param[in]			- Enable/Disable
+ *
+ * @return				- none
+ *
+ * @Note 				- none
+ */
+void I2C_SlaveEnableDisableCallbackEvents(I2C_RegDef_t *pI2Cx, uint8_t EnorDi)
+{
+    if (EnorDi == ENABLE)
+    {
+        //enable TXIE, RXIE, STOPIE, ADDRIE, NACKIE Control Bits
+		pI2Cx->CR1 |= ( 1 << I2C_CR1_TXIE);
+        pI2Cx->CR1 |= ( 1 << I2C_CR1_RXIE);
+        pI2Cx->CR1 |= ( 1 << I2C_CR1_STOPIE);
+        pI2Cx->CR1 |= ( 1 << I2C_CR1_ADDRIE);
+        pI2Cx->CR1 |= ( 1 << I2C_CR1_NACKIE);
+    }
+    else
+    {
+        //disable TXIE, RXIE, STOPIE, ADDRIE, NACKIE Control Bits
+		pI2Cx->CR1 &= ~( 1 << I2C_CR1_TXIE);
+        pI2Cx->CR1 &= ~( 1 << I2C_CR1_RXIE);
+        pI2Cx->CR1 &= ~( 1 << I2C_CR1_STOPIE);
+        pI2Cx->CR1 &= ~( 1 << I2C_CR1_ADDRIE);
+        pI2Cx->CR1 &= ~( 1 << I2C_CR1_NACKIE);
+    }
+}
+
+
+/****************************************************************
+ * @fn					- I2C_SlaveSendData
+ *
+ * @brief				-
+ *
+ * @param[in]			- Pointer to the I2C handle
+ * @param[in]			- Data to send byte by byte
+ *
+ * @return				- none
+ *
+ * @Note 				- none
+ */
+void I2C_SlaveSendData(I2C_RegDef_t *pI2Cx, uint8_t data)
+{
+    pI2Cx->TXDR = data;
+}
+
+/****************************************************************
+ * @fn					- I2C_SlaveReceiveData
+ *
+ * @brief				-
+ *
+ * @param[in]			- Pointer to the I2C handle
+ *
+ * @return				- none
+ *
+ * @Note 				- none
+ */
+uint8_t I2C_SlaveReceiveData(I2C_RegDef_t *pI2Cx)
+{
+    return (uint8_t)pI2Cx->RXDR;
+}
