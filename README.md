@@ -19,10 +19,10 @@ Developed around the [Mastering Microcontroller and Embedded Driver Development]
 
 ## Application Caputres 📷
 
-<img width="958" alt="SPI_Send_Data" src="https://github.com/Raziz1/STM32F767ZI_Driver/assets/73625971/8ff78b48-3029-4ecc-817a-1f4fc4dbe99d">
+<img width="958" alt="SPI_Send_Data" src="https://github.com/Raziz1/STM32F767ZI_Driver/blob/master/Application_Captures/SPI_Send_Data.png">
 
-<img width="958" alt="I2C_Send_Data" src="https://github.com/Raziz1/STM32F767ZI_Driver/assets/73625971/1c7e21f6-3998-4e78-9ae5-1b8ab7c34435">
+<img width="958" alt="I2C_Send_Data" src="https://github.com/Raziz1/STM32F767ZI_Driver/blob/master/Application_Captures/I2C_Send_Data.png">
 
-<img width="958" alt="USART_Send_Data" src="https://github.com/Raziz1/STM32F767ZI_Driver/assets/73625971/9cc81da4-2477-4a14-a4dd-9d7fdc9aa060">
+<img width="958" alt="USART_Send_Data" src="https://github.com/Raziz1/STM32F767ZI_Driver/blob/master/Application_Captures/USART_Send_Data.png">
 
 
